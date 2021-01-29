@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider_sample/book_detail.dart';
 import 'package:provider_sample/more_book.dart';
 import 'package:provider_sample/widgets.dart';
 
@@ -32,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           buildBody(),
-          buildBottomBar(),
+          //buildBottomBar(),
         ],
       ),
     );
@@ -93,10 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           buildText("Keşfet", 32, Colors.black),
           buildSizedBox(12),
-          buildBookImage(context, true, 485,
-              author: "Ernest Hemingway",
-              title: "For Whom the Bell Tolls",
-              imagePath: "lib/assets/images/51frUNw6i9L.jpg"),
+          buildSplash(
+            context: context,
+            author: "Ernest Hemingway",
+            imagePath: "lib/assets/images/51frUNw6i9L.jpg",
+            page: "789",
+            title: "For Whom the Bell Tolls",
+          ),
           buildSizedBox(12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     child: Text("Daha Fazla"),
                   ),
-                  IconButton(icon: Icon(Icons.arrow_forward), onPressed: null),
+                  buildIconButton(),
                 ],
               ),
             ],
@@ -122,6 +124,16 @@ class _MyHomePageState extends State<MyHomePage> {
           buildSizedBox(12),
           buildBookHorizontalListView1(context),
         ],
+      ),
+    );
+  }
+
+  IconButton buildIconButton() {
+    return IconButton(
+      icon: Icon(Icons.arrow_forward),
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MoreBook()),
       ),
     );
   }

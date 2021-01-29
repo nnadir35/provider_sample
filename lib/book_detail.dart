@@ -107,7 +107,7 @@ class _BookDetailState extends State<BookDetail> {
   Expanded buildSelectedBookImage() {
     return Expanded(
       flex: 2,
-      child: buildBookImage(context, true, 150, imagePath: widget.bookImage),
+      child: buildSplash(context: context, imagePath: widget.bookImage),
     );
   }
 }

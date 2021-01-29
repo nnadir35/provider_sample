@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider_sample/book_detail.dart';
 import 'package:provider_sample/widgets.dart';
 
 class MoreBook extends StatefulWidget {
@@ -21,16 +22,12 @@ class _MoreBookState extends State<MoreBook> {
                 future: DefaultAssetBundle.of(context)
                     .loadString("lib/assets/json/books.json"),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3),
+                  return ListView.builder(
                     itemCount: 18,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (BuildContext context, int index) {
                       var books = jsonDecode(snapshot.data.toString());
                       return snapshot.hasData
-                          ? buildBookImage(context, false, 100,
-                              title: books[index]["title"],
-                              imagePath: books[index]["imageLink"])
+                          ? buildLine(context, books, index)
                           : Center(
                               child: CircularProgressIndicator(),
                             );
@@ -40,6 +37,57 @@ class _MoreBookState extends State<MoreBook> {
           ),
         ],
       ),
+    );
+  }
+
+  Container buildLine(BuildContext context, books, int index) {
+    return Container(
+      decoration:
+          BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Container(
+              width: MediaQuery.of(context).size.width / 3,
+              child: Image(
+                image: AssetImage(books[index]["imageLink"]),
+              ),
+            ),
+          ),
+          aboutBook(books, index),
+          navigateBookDetail(context, books, index),
+        ],
+      ),
+    );
+  }
+
+  IconButton navigateBookDetail(BuildContext context, books, int index) {
+    return IconButton(
+      icon: Icon(
+        Icons.arrow_forward_ios,
+      ),
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BookDetail(
+            title: books[index]["title"],
+            author: books[index]["author"],
+            page: "789",
+            bookImage: books[index]["imageLink"],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Column aboutBook(books, int index) {
+    return Column(
+      children: [
+        Text(books[index]["title"]),
+        Text(books[index]["author"]),
+      ],
     );
   }
 

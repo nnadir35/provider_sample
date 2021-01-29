@@ -50,25 +50,7 @@ Container buildBookImage(BuildContext context, bool big, double height,
     width: big == true ? MediaQuery.of(context).size.width : 100,
     child: Column(
       children: [
-        GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BookDetail(
-                title: title,
-                author: author,
-                page: page,
-                bookImage: imagePath,
-              ),
-            ),
-          ),
-          child: Container(
-            height: height,
-            child: Image(
-              image: AssetImage(imagePath),
-            ),
-          ),
-        ),
+        buildImage(context, title, author, page, imagePath),
         buildText(
           title == null ? "" : title,
           13,
@@ -79,18 +61,54 @@ Container buildBookImage(BuildContext context, bool big, double height,
   );
 }
 
-// Container buildBookHorizontalListView(String imagePathForFun, {String data}) {
-//   return Container(
-//     height: 200,
-//     child: ListView.builder(
-//       scrollDirection: Axis.horizontal,
-//       itemCount: 5,
-//       itemBuilder: (BuildContext context, int index) {
-//         return buildBookImage(imagePathForFun, context, false, data: data);
-//       },
-//     ),
-//   );
-// }
+GestureDetector buildImage(BuildContext context, String title, String author,
+    String page, String imagePath) {
+  return GestureDetector(
+    onTap: () => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookDetail(
+          title: title,
+          author: author,
+          page: page,
+          bookImage: imagePath,
+        ),
+      ),
+    ),
+    child: Container(
+      child: Image(
+        image: AssetImage(imagePath),
+      ),
+    ),
+  );
+}
+
+GestureDetector buildSplash(
+    {BuildContext context,
+    String title,
+    String author,
+    String page,
+    String imagePath}) {
+  return GestureDetector(
+    onTap: () => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookDetail(
+          title: title,
+          author: author,
+          page: page,
+          bookImage: imagePath,
+        ),
+      ),
+    ),
+    child: Container(
+      width: MediaQuery.of(context).size.width,
+      child: Image(
+        image: AssetImage(imagePath),
+      ),
+    ),
+  );
+}
 
 Container buildText(String text, double fontSize, Color color) {
   return Container(
