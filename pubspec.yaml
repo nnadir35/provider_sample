@@ -29,6 +29,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
+  provider: ^4.3.3
   google_fonts: ^1.1.2
 
 
@@ -63,6 +64,23 @@ flutter:
     - lib/assets/images/war-and-peace.jpg
     - lib/assets/images/the-idiot.jpg
     - lib/assets/images/the-trial.jpg
+    - lib/assets/images/don-quijote-de-la-mancha.jpg
+    - lib/assets/images/the-iliad-of-homer.jpg
+    - lib/assets/images/great-expectations.jpg
+    - lib/assets/images/absalom-absalom.jpg
+    - lib/assets/images/madame-bovary.jpg
+    - lib/assets/images/l-education-sentimentale.jpg
+    - lib/assets/images/gypsy-ballads.jpg
+    - lib/assets/images/to-the-lighthouse.jpg
+    - lib/assets/images/the-death-of-ivan-ilyich.jpg
+    - lib/assets/images/one-hundred-years-of-solitude.jpg
+    - lib/assets/images/anna-karenina.jpg
+    - lib/assets/images/love-in-the-time-of-cholera.jpg  
+    - lib/assets/images/the-old-man-and-the-sea.jpg
+    - lib/assets/images/the-odyssey-of-homer.jpg
+    - lib/assets/images/stories-of-franz-kafka.jpg
+    - lib/assets/images/the-castle.jpg
+    - lib/assets/images/zorba-the-greek.jpg
     - lib/assets/json/books.json
 
 

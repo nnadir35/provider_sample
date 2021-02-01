@@ -1,4 +1,43 @@
-[ {
+[   {
+  "author": "William Shakespeare",
+  "country": "England",
+  "imageLink": "lib/assets/images/hamlet.jpg",
+  "language": "English",
+  "link": "https://en.wikipedia.org/wiki/Hamlet\n",
+  "pages": 432,
+  "title": "Hamlet",
+  "year": 1603
+},
+{
+  "author": "Michel de Montaigne",
+  "country": "France",
+  "imageLink": "lib/assets/images/essais.jpg",
+  "language": "French",
+  "link": "https://en.wikipedia.org/wiki/Essays_(Montaigne)\n",
+  "pages": 404,
+  "title": "Essays",
+  "year": 1595
+},
+{
+  "author": "William Shakespeare",
+  "country": "England",
+  "imageLink": "lib/assets/images/king-lear.jpg",
+  "language": "English",
+  "link": "https://en.wikipedia.org/wiki/King_Lear\n",
+  "pages": 384,
+  "title": "King Lear",
+  "year": 1608
+},
+{
+  "author": "William Shakespeare",
+  "country": "England",
+  "imageLink": "lib/assets/images/othello.jpg",
+  "language": "English",
+  "link": "https://en.wikipedia.org/wiki/Othello\n",
+  "pages": 314,
+  "title": "Othello",
+  "year": 1609
+},{
   "author": "Thomas Mann",
   "country": "Germany",
   "imageLink": "lib/assets/images/buddenbrooks.jpg",
@@ -9,16 +48,6 @@
   "year": 1901
 },
   {
-    "author": "Jose Saramago",
-    "country": "Portugal",
-    "imageLink": "lib/assets/images/blindness.jpg",
-    "language": "Portuguese",
-    "link": "https://en.wikipedia.org/wiki/Blindness_(novel)\n",
-    "pages": 352,
-    "title": "Blindness",
-    "year": 1995
-  },
-  {
     "author": "Thomas Mann",
     "country": "Germany",
     "imageLink": "lib/assets/images/the-magic-mountain.jpg",
@@ -27,16 +56,6 @@
     "pages": 720,
     "title": "The Magic Mountain",
     "year": 1924
-  },
-  {
-    "author": "Michel de Montaigne",
-    "country": "France",
-    "imageLink": "lib/assets/images/essais.jpg",
-    "language": "French",
-    "link": "https://en.wikipedia.org/wiki/Essays_(Montaigne)\n",
-    "pages": 404,
-    "title": "Essays",
-    "year": 1595
   },
   {
     "author": "Virginia Woolf",
@@ -69,17 +88,6 @@
     "year": 1726
   },
   {
-    "author": "Saadi",
-    "country": "Persia, Persian Empire",
-    "imageLink": "lib/assets/images/bostan.jpg",
-    "language": "Persian",
-    "link": "https://en.wikipedia.org/wiki/Bustan_(book)\n",
-    "pages": 298,
-    "title": "Bostan",
-    "year": 1257
-  },
-
-  {
     "author": "Johann Wolfgang von Goethe",
     "country": "Saxe-Weimar",
     "imageLink": "lib/assets/images/faust.jpg",
@@ -98,46 +106,6 @@
     "pages": 432,
     "title": "Dead Souls",
     "year": 1842
-  },
-  {
-    "author": "Knut Hamsun",
-    "country": "Norway",
-    "imageLink": "lib/assets/images/hunger.jpg",
-    "language": "Norwegian",
-    "link": "https://en.wikipedia.org/wiki/Hunger_(Hamsun_novel)\n",
-    "pages": 176,
-    "title": "Hunger",
-    "year": 1890
-  },
-  {
-    "author": "William Shakespeare",
-    "country": "England",
-    "imageLink": "lib/assets/images/hamlet.jpg",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/Hamlet\n",
-    "pages": 432,
-    "title": "Hamlet",
-    "year": 1603
-  },
-  {
-    "author": "William Shakespeare",
-    "country": "England",
-    "imageLink": "lib/assets/images/king-lear.jpg",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/King_Lear\n",
-    "pages": 384,
-    "title": "King Lear",
-    "year": 1608
-  },
-  {
-    "author": "William Shakespeare",
-    "country": "England",
-    "imageLink": "lib/assets/images/othello.jpg",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/Othello\n",
-    "pages": 314,
-    "title": "Othello",
-    "year": 1609
   },
   {
     "author": "Leo Tolstoy",
@@ -182,7 +150,7 @@
   {
     "author": "Miguel de Cervantes",
     "country": "Spain",
-    "imageLink": "images/don-quijote-de-la-mancha.jpg",
+    "imageLink": "lib/assets/images/don-quijote-de-la-mancha.jpg",
     "language": "Spanish",
     "link": "https://en.wikipedia.org/wiki/Don_Quixote\n",
     "pages": 1056,
@@ -192,47 +160,18 @@
   {
     "author": "Charles Dickens",
     "country": "United Kingdom",
-    "imageLink": "images/great-expectations.jpg",
+    "imageLink": "lib/assets/images/great-expectations.jpg",
     "language": "English",
     "link": "https://en.wikipedia.org/wiki/Great_Expectations\n",
     "pages": 194,
     "title": "Great Expectations",
     "year": 1861
   },
-  {
-    "author": "Fyodor Dostoevsky",
-    "country": "Russia",
-    "imageLink": "images/crime-and-punishment.jpg",
-    "language": "Russian",
-    "link": "https://en.wikipedia.org/wiki/Crime_and_Punishment\n",
-    "pages": 551,
-    "title": "Crime and Punishment",
-    "year": 1866
-  },
-  {
-    "author": "Fyodor Dostoevsky",
-    "country": "Russia",
-    "imageLink": "images/the-possessed.jpg",
-    "language": "Russian",
-    "link": "https://en.wikipedia.org/wiki/Demons_(Dostoyevsky_novel)\n",
-    "pages": 768,
-    "title": "The Possessed",
-    "year": 1872
-  },
-  {
-    "author": "Fyodor Dostoevsky",
-    "country": "Russia",
-    "imageLink": "images/the-brothers-karamazov.jpg",
-    "language": "Russian",
-    "link": "https://en.wikipedia.org/wiki/The_Brothers_Karamazov\n",
-    "pages": 824,
-    "title": "The Brothers Karamazov",
-    "year": 1880
-  },
+
   {
     "author": "William Faulkner",
     "country": "United States",
-    "imageLink": "images/absalom-absalom.jpg",
+    "imageLink": "lib/assets/images/absalom-absalom.jpg",
     "language": "English",
     "link": "https://en.wikipedia.org/wiki/Absalom,_Absalom!\n",
     "pages": 313,
@@ -240,19 +179,9 @@
     "year": 1936
   },
   {
-    "author": "William Faulkner",
-    "country": "United States",
-    "imageLink": "images/the-sound-and-the-fury.jpg",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/The_Sound_and_the_Fury\n",
-    "pages": 326,
-    "title": "The Sound and the Fury",
-    "year": 1929
-  },
-  {
     "author": "Gustave Flaubert",
     "country": "France",
-    "imageLink": "images/madame-bovary.jpg",
+    "imageLink": "lib/assets/images/madame-bovary.jpg",
     "language": "French",
     "link": "https://en.wikipedia.org/wiki/Madame_Bovary\n",
     "pages": 528,
@@ -262,7 +191,7 @@
   {
     "author": "Gustave Flaubert",
     "country": "France",
-    "imageLink": "images/l-education-sentimentale.jpg",
+    "imageLink": "lib/assets/images/l-education-sentimentale.jpg",
     "language": "French",
     "link": "https://en.wikipedia.org/wiki/Sentimental_Education\n",
     "pages": 606,
@@ -272,7 +201,7 @@
   {
     "author": "Federico Lorca",
     "country": "Spain",
-    "imageLink": "images/gypsy-ballads.jpg",
+    "imageLink": "lib/assets/images/gypsy-ballads.jpg",
     "language": "Spanish",
     "link": "https://en.wikipedia.org/wiki/Gypsy_Ballads\n",
     "pages": 218,
@@ -282,7 +211,7 @@
   {
     "author": "Gabriel Garcia Marquez",
     "country": "Colombia",
-    "imageLink": "images/one-hundred-years-of-solitude.jpg",
+    "imageLink": "lib/assets/images/one-hundred-years-of-solitude.jpg",
     "language": "Spanish",
     "link": "https://en.wikipedia.org/wiki/One_Hundred_Years_of_Solitude\n",
     "pages": 417,
@@ -292,7 +221,7 @@
   {
     "author": "Gabriel Garcia Marquez",
     "country": "Colombia",
-    "imageLink": "images/love-in-the-time-of-cholera.jpg",
+    "imageLink": "lib/assets/images/love-in-the-time-of-cholera.jpg",
     "language": "Spanish",
     "link": "https://en.wikipedia.org/wiki/Love_in_the_Time_of_Cholera\n",
     "pages": 368,
@@ -302,7 +231,7 @@
   {
     "author": "Ernest Hemingway",
     "country": "United States",
-    "imageLink": "images/51frUNw6i9L",
+    "imageLink": "lib/assets/images/51frUNw6i9L.jpg",
     "language": "English",
     "link": "https://en.wikipedia.org/wiki/The_Old_Man_and_the_Sea\n",
     "pages": 480,
@@ -312,7 +241,7 @@
   {
     "author": "Ernest Hemingway",
     "country": "United States",
-    "imageLink": "images/the-old-man-and-the-sea.jpg",
+    "imageLink": "lib/assets/images/the-old-man-and-the-sea.jpg",
     "language": "English",
     "link": "https://en.wikipedia.org/wiki/The_Old_Man_and_the_Sea\n",
     "pages": 128,
@@ -322,7 +251,7 @@
   {
     "author": "Homer",
     "country": "Greece",
-    "imageLink": "images/the-iliad-of-homer.jpg",
+    "imageLink": "lib/assets/images/the-iliad-of-homer.jpg",
     "language": "Greek",
     "link": "https://en.wikipedia.org/wiki/Iliad\n",
     "pages": 608,
@@ -332,7 +261,7 @@
   {
     "author": "Homer",
     "country": "Greece",
-    "imageLink": "images/the-odyssey-of-homer.jpg",
+    "imageLink": "lib/assets/images/the-odyssey-of-homer.jpg",
     "language": "Greek",
     "link": "https://en.wikipedia.org/wiki/Odyssey\n",
     "pages": 374,
@@ -340,19 +269,9 @@
     "year": -800
   },
   {
-    "author": "Henrik Ibsen",
-    "country": "Norway",
-    "imageLink": "images/a-Dolls-house.jpg",
-    "language": "Norwegian",
-    "link": "https://en.wikipedia.org/wiki/A_Doll%27s_House\n",
-    "pages": 68,
-    "title": "A Doll's House",
-    "year": 1879
-  },
-  {
     "author": "Franz Kafka",
     "country": "Czechoslovakia",
-    "imageLink": "images/stories-of-franz-kafka.jpg",
+    "imageLink": "lib/assets/images/stories-of-franz-kafka.jpg",
     "language": "German",
     "link": "https://en.wikipedia.org/wiki/Franz_Kafka_bibliography#Short_stories\n",
     "pages": 488,
@@ -362,7 +281,7 @@
   {
     "author": "Franz Kafka",
     "country": "Czechoslovakia",
-    "imageLink": "images/the-castle.jpg",
+    "imageLink": "lib/assets/images/the-castle.jpg",
     "language": "German",
     "link": "https://en.wikipedia.org/wiki/The_Castle_(novel)\n",
     "pages": 352,
@@ -370,42 +289,19 @@
     "year": 1926
   },
   {
-    "author": "Yasunari Kawabata",
-    "country": "Japan",
-    "imageLink": "images/the-sound-of-the-mountain.jpg",
-    "language": "Japanese",
-    "link": "https://en.wikipedia.org/wiki/The_Sound_of_the_Mountain\n",
-    "pages": 288,
-    "title": "The Sound of the Mountain",
-    "year": 1954
-  },
-  {
     "author": "Nikos Kazantzakis",
     "country": "Greece",
-    "imageLink": "images/zorba-the-greek.jpg",
+    "imageLink": "lib/assets/images/zorba-the-greek.jpg",
     "language": "Greek",
     "link": "https://en.wikipedia.org/wiki/Zorba_the_Greek\n",
     "pages": 368,
     "title": "Zorba the Greek",
     "year": 1946
   },
- 
-
-
-  {
-    "author": "Murasaki Shikibu",
-    "country": "Japan",
-    "imageLink": "images/the-tale-of-genji.jpg",
-    "language": "Japanese",
-    "link": "https://en.wikipedia.org/wiki/The_Tale_of_Genji\n",
-    "pages": 1360,
-    "title": "The Tale of Genji",
-    "year": 1006
-  },
   {
     "author": "Leo Tolstoy",
     "country": "Russia",
-    "imageLink": "images/anna-karenina.jpg",
+    "imageLink": "lib/assets/images/anna-karenina.jpg",
     "language": "Russian",
     "link": "https://en.wikipedia.org/wiki/Anna_Karenina\n",
     "pages": 864,
@@ -413,41 +309,9 @@
     "year": 1877
   },
   {
-    "author": "George Orwell",
-    "country": "United Kingdom",
-    "imageLink": "images/nineteen-eighty-four.jpg",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/Nineteen_Eighty-Four\n",
-    "pages": 272,
-    "title": "Nineteen Eighty-Four",
-    "year": 1949
-  },
-
-  {
-    "author": "Marcel Proust",
-    "country": "France",
-    "imageLink": "images/a-la-recherche-du-temps-perdu.jpg",
-    "language": "French",
-    "link": "https://en.wikipedia.org/wiki/In_Search_of_Lost_Time\n",
-    "pages": 2408,
-    "title": "In Search of Lost Time",
-    "year": 1920
-  },
-
-  {
-    "author": "Tayeb Salih",
-    "country": "Sudan",
-    "imageLink": "images/season-of-migration-to-the-north.jpg",
-    "language": "Arabic",
-    "link": "https://en.wikipedia.org/wiki/Season_of_Migration_to_the_North\n",
-    "pages": 139,
-    "title": "Season of Migration to the North",
-    "year": 1966
-  },
-  {
     "author": "Leo Tolstoy",
     "country": "Russia",
-    "imageLink": "images/the-death-of-ivan-ilyich.jpg",
+    "imageLink": "lib/assets/images/the-death-of-ivan-ilyich.jpg",
     "language": "Russian",
     "link": "https://en.wikipedia.org/wiki/The_Death_of_Ivan_Ilyich\n",
     "pages": 92,
@@ -455,32 +319,11 @@
     "year": 1886
   },
   {
-    "author": "Mark Twain",
-    "country": "United States",
-    "imageLink": "images/the-adventures-of-huckleberry-finn.jpg",
-    "language": "English",
-    "link": "https://en.wikipedia.org/wiki/Adventures_of_Huckleberry_Finn\n",
-    "pages": 224,
-    "title": "The Adventures of Huckleberry Finn",
-    "year": 1884
-  },
-
-  {
     "author": "Virginia Woolf",
     "country": "United Kingdom",
-    "imageLink": "images/to-the-lighthouse.jpg",
+    "imageLink": "lib/assets/images/to-the-lighthouse.jpg",
     "language": "English",
     "link": "https://en.wikipedia.org/wiki/To_the_Lighthouse\n",
-    "pages": 209,
-    "title": "To the Lighthouse",
-    "year": 1927
-  },
-  {
-    "author": "Halide Edip Adıvar",
-    "country": "Turkey",
-    "imageLink": "images/to-the-lighthouse.jpg",
-    "language": "Turkish",
-    "link": "https://upload.wikimedia.org/wikipedia/tr/thumb/8/8d/Halide_Edip_Ad%C4%B1var-Sinekli_Bakkal.jpg/220px-Halide_Edip_Ad%C4%B1var-Sinekli_Bakkal.jpg",
     "pages": 209,
     "title": "To the Lighthouse",
     "year": 1927
