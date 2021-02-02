@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_sample/book_provider.dart';
+import 'package:provider_sample/provider/book_detail.dart';
+import 'package:provider_sample/provider/book_provider.dart';
+import 'package:provider_sample/provider/fav_books_provider.dart';
 import 'package:provider_sample/screens/book_detail.dart';
 import 'package:provider_sample/screens/fav_books.dart';
 import 'package:provider_sample/screens/homepage.dart';
@@ -11,28 +13,38 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final BookProvider bookListService = BookProvider();
-  final BookProvider bookService = BookProvider();
+  final BookProvider bookProvider = BookProvider();
+  final BookDetailProvider bookDetailProvider = BookDetailProvider();
+  final FavoriteBooksProvider favBooksProvider = FavoriteBooksProvider();
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         FutureProvider(
-          create: (context) => bookListService.allBooks(),
+          create: (context) => bookProvider.allBooks(),
         ),
         FutureProvider(
-          create: (context) => bookService.randomBookGenerate(),
-        ),
-        FutureProvider(
-          create: (context) => bookService.queryByAuthor(),
+          create: (context) => bookProvider.randomBookGenerate(),
         ),
         ChangeNotifierProvider(
           create: (
             context,
           ) =>
-              bookService,
-        )
+              bookProvider,
+        ),
+        ChangeNotifierProvider(
+          create: (
+            context,
+          ) =>
+              favBooksProvider,
+        ),
+        ChangeNotifierProvider(
+          create: (
+            context,
+          ) =>
+              bookDetailProvider,
+        ),
       ],
       child: MaterialApp(
         initialRoute: "/",

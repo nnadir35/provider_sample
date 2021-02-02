@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_sample/book_data.dart';
-import 'package:provider_sample/book_provider.dart';
+import 'package:provider_sample/provider/book_provider.dart';
 import 'package:provider_sample/screens/book_detail.dart';
 import 'package:provider_sample/screens/more_book.dart';
 import 'package:provider_sample/widgets.dart';
@@ -34,6 +34,99 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Expanded buildBody() {
+    return Expanded(
+      flex: 11,
+      child: Column(
+        children: [
+          buildTopScreen(),
+          buildMainPage(),
+        ],
+      ),
+    );
+  }
+
+  Widget buildMainPage() {
+    return Expanded(
+      flex: 11,
+      child: ListView(
+        children: [
+          buildText("Keşfet", 32, Colors.black, FontWeight.w800),
+          //buildSizedBox(12),
+          buildSplash(),
+          buildSizedBox(12),
+          buildRow(),
+          buildListView(books.bookList, true),
+          buildSizedBox(12),
+          buildText(
+              "Seçtiğiniz dilde kitaplar", 24, Colors.black, FontWeight.w800),
+          buildSizedBox(12),
+          buildListView(books.booksForUser, false),
+          buildBottomBar(),
+        ],
+      ),
+    );
+  }
+
+  Container buildSplash() {
+    return Container(
+      child: FutureBuilder(
+        future: books.randomBookGenerate(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return randomBook == null
+              ? Text("Yükleniyor")
+              : GestureDetector(
+                  onTap: () {
+                    books.selectedBook = books.randomBook;
+                    Navigator.pushNamed(context, "/book_detail");
+                  },
+                  child: books.randomBook == null
+                      ? Text("Yükleniyor")
+                      : newSplash(context, books.randomBook.imageLink),
+                );
+        },
+      ),
+    );
+  }
+
+  Widget buildListView(List<Book> x, bool allBooks) {
+    List<Book> choosen = x;
+    return Container(
+      height: MediaQuery.of(context).size.height / 3.2,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: allBooks == true ? 6 : choosen.length,
+        itemBuilder: (BuildContext context, int index) {
+          return choosen == null
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : GestureDetector(
+                  onTap: () {
+                    books.selectedBook = choosen[index];
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookDetail(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: buildBookImage(
+                      context,
+                      false,
+                      125,
+                      title: choosen[index].title,
+                      imagePath: choosen[index].imageLink,
+                    ),
+                  ),
+                );
+        },
+      ),
+    );
+  }
+
   Widget buildBottomBar() {
     return Container(
       color: Colors.white,
@@ -41,20 +134,9 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           buildIconAddFav(),
-          buildIconUserPrefs(),
         ],
       ),
     );
-  }
-
-  IconButton buildIconUserPrefs() {
-    return IconButton(
-        icon: Icon(
-          Icons.person_outline,
-          size: 40,
-          color: Colors.grey,
-        ),
-        onPressed: null);
   }
 
   IconButton buildIconAddFav() {
@@ -67,44 +149,11 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () => Navigator.pushNamed(context, "/fav_books"));
   }
 
-  Expanded buildBody() {
-    return Expanded(
-      flex: 11,
-      child: Column(
-        children: [
-          //buildTopScreen(),
-          buildMainPage(),
-        ],
-      ),
-    );
-  }
-
-  Widget buildMainPage() {
-    return Expanded(
-      flex: 11,
-      child: ListView(
-        children: [
-          buildText("Keşfet", 32, Colors.black),
-          buildSizedBox(12),
-          buildSplash(),
-          buildSizedBox(12),
-          buildRow(),
-          buildListView(listBookService),
-          buildSizedBox(12),
-          buildText("Seçtiğiniz dilde kitaplar", 24, Colors.black),
-          buildSizedBox(12),
-          buildListView(listBookService),
-          buildBottomBar(),
-        ],
-      ),
-    );
-  }
-
   Row buildRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        buildText("Popüler", 32, Colors.black),
+        buildText("Popüler", 32, Colors.black, FontWeight.w800),
         Row(
           children: [
             GestureDetector(
@@ -121,62 +170,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Container buildSplash() {
-    return Container(
-      child: FutureBuilder(
-        future: books.randomBookGenerate(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return randomBook == null
-              ? Text("Yükleniyor")
-              : GestureDetector(
-                  onTap: () {
-                    books.selectedBook = books.randomBook;
-                    Navigator.pushNamed(context, "/book_detail");
-                  },
-                  child: newSplash(context, books.randomBook.imageLink),
-                );
-        },
-      ),
-    );
-  }
-
-  Widget buildListView(List<Book> bookService) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 3.2,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: books.bookList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return bookService == null
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : GestureDetector(
-                  onTap: () {
-                    books.selectedBook = bookService[index];
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookDetail(),
-                      ),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: buildBookImage(
-                      context,
-                      false,
-                      125,
-                      title: books.bookList[index].title,
-                      imagePath: books.bookList[index].imageLink,
-                    ),
-                  ),
-                );
-        },
-      ),
-    );
-  }
-
   IconButton buildIconButton() {
     return IconButton(
       icon: Icon(Icons.arrow_forward),
@@ -187,31 +180,58 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Expanded buildTopScreen() {
-    return Expanded(
-      flex: 2,
-      child: SingleChildScrollView(
-        child: buildSearchBar(),
-      ),
-    );
-  }
-
-  Widget buildSearchBar() {
+  Widget buildTopScreen() {
     return Container(
-      margin: EdgeInsets.only(top: 50, right: 10, left: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
-          hintText: 'Kitap veya yazar adı girin',
-          suffixIcon: Icon(Icons.search),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.only(left: 5, top: 12),
+      margin: EdgeInsets.only(top: 35),
+      child: Expanded(
+        flex: 2,
+        child: InputDecorator(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton(
+              hint: Text("İstediğiniz dile göre kitap arayın"),
+              value: books.language,
+              isDense: true,
+              onChanged: (newValue) {
+                books.dropdownButtonValueChange(newValue);
+                print("books.language: " + books.language);
+                books.queryByLanguage();
+              },
+              items: books.translateLanguage.entries
+                  .map(
+                    (MapEntry element) => DropdownMenuItem(
+                      value: element.value,
+                      child: Text(element.key),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
         ),
       ),
     );
   }
+
+  // Widget buildSearchBar() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: 50, right: 10, left: 10),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(8),
+  //     ),
+  //     child: TextField(
+  //       decoration: InputDecoration(
+  //         hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
+  //         hintText: 'Kitap veya yazar adı girin',
+  //         suffixIcon: Icon(Icons.search),
+  //         border: InputBorder.none,
+  //         contentPadding: EdgeInsets.only(left: 5, top: 12),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

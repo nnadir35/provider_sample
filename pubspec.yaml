@@ -80,9 +80,10 @@ flutter:
     - lib/assets/images/the-odyssey-of-homer.jpg
     - lib/assets/images/stories-of-franz-kafka.jpg
     - lib/assets/images/the-castle.jpg
-    - lib/assets/images/zorba-the-greek.jpg
     - lib/assets/json/books.json
-
+    - lib/assets/images/crime-and-punishment.jpg
+    - lib/assets/images/the-possessed.jpg
+    - lib/assets/images/the-brothers-karamazov.jpg 
 
   # To add assets to your application, add an assets section, like this:
   # assets:

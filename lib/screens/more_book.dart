@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_sample/book_data.dart';
-import 'package:provider_sample/book_provider.dart';
+import 'package:provider_sample/provider/book_provider.dart';
 
 class MoreBook extends StatefulWidget {
   @override
@@ -15,21 +15,14 @@ class _MoreBookState extends State<MoreBook> {
   Widget build(BuildContext context) {
     listBookService = Provider.of<List<Book>>(context);
     provider = Provider.of<BookProvider>(context);
-    return Scaffold(
-        body: Column(children: [
-      Flexible(
-        flex: 1,
-        child: buildSearchBar(),
-      ),
-      listView(context)
-    ]));
+    return Scaffold(body: Column(children: [listView(context)]));
   }
 
   Container listView(BuildContext context) {
     return Container(
         height: MediaQuery.of(context).size.height,
         child: ListView.builder(
-            itemCount: 14,
+            itemCount: provider.bookList.length,
             itemBuilder: (BuildContext context, int index) {
               return listBookService == null
                   ? Center(

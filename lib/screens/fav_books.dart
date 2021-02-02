@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_sample/book_provider.dart';
+
+import 'package:provider_sample/provider/book_provider.dart';
+import 'package:provider_sample/provider/fav_books_provider.dart';
 import 'package:provider_sample/widgets.dart';
 
 class FavoriteBooks extends StatefulWidget {
@@ -12,7 +14,8 @@ class FavoriteBooks extends StatefulWidget {
 class _FavoriteBooksState extends State<FavoriteBooks> {
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<BookProvider>(context);
+    var bookProvider = Provider.of<BookProvider>(context);
+    var favBookProvider = Provider.of<FavoriteBooksProvider>(context);
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -34,9 +37,9 @@ class _FavoriteBooksState extends State<FavoriteBooks> {
             Flexible(
               flex: 12,
               child: ListView.builder(
-                itemCount: provider.favBookList.length,
+                itemCount: favBookProvider.favBookList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return newMethod(context, provider, index);
+                  return newMethod(context, favBookProvider, index);
                 },
               ),
             ),
@@ -46,10 +49,11 @@ class _FavoriteBooksState extends State<FavoriteBooks> {
     );
   }
 
-  Container newMethod(BuildContext context, BookProvider provider, int index) {
+  Container newMethod(
+      BuildContext context, FavoriteBooksProvider provider, int index) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(width: 0.5, color: Colors.grey),
+        border: Border.all(width: 0.3, color: Colors.grey),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

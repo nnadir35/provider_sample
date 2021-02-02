@@ -16,11 +16,7 @@ Container buildBookImage(BuildContext context, bool big, double height,
     child: Column(
       children: [
         buildImage(context, imagePath),
-        buildText(
-          title == null ? "" : title,
-          13,
-          Colors.black,
-        ),
+        buildText(title, 13, Colors.black, FontWeight.normal),
       ],
     ),
   );
@@ -28,9 +24,12 @@ Container buildBookImage(BuildContext context, bool big, double height,
 
 Widget buildImage(BuildContext context, String imagePath) {
   return Container(
-    child: Image(
-      height: 165,
-      image: AssetImage(imagePath),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: Image(
+        height: 165,
+        image: AssetImage(imagePath),
+      ),
     ),
   );
 }
@@ -61,18 +60,23 @@ Widget newSplash(BuildContext context, String imagePath) {
   return Container(
     width: MediaQuery.of(context).size.width,
     child: Image(
-      fit: BoxFit.fitHeight,
+      //fit: BoxFit.fitHeight,
       image: AssetImage(imagePath),
     ),
   );
 }
 
-Container buildText(String text, double fontSize, Color color) {
+Container buildText(
+    String text, double fontSize, Color color, FontWeight fontWeight) {
   return Container(
     alignment: Alignment.topLeft,
     child: Text(
       text,
-      style: TextStyle(color: color, fontSize: fontSize),
+      style: TextStyle(
+        color: color,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+      ),
     ),
   );
 }

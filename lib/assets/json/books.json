@@ -120,12 +120,42 @@
   {
     "author": "Fyodor Dostoevsky",
     "country": "Russia",
+    "imageLink": "lib/assets/images/crime-and-punishment.jpg",
+    "language": "Russian",
+    "link": "https://en.wikipedia.org/wiki/Crime_and_Punishment\n",
+    "pages": 551,
+    "title": "Crime and Punishment",
+    "year": 1866
+  },
+  {
+    "author": "Fyodor Dostoevsky",
+    "country": "Russia",
     "imageLink": "lib/assets/images/the-idiot.jpg",
     "language": "Russian",
     "link": "https://en.wikipedia.org/wiki/The_Idiot\n",
     "pages": 656,
     "title": "The Idiot",
     "year": 1869
+  },
+  {
+    "author": "Fyodor Dostoevsky",
+    "country": "Russia",
+    "imageLink": "lib/assets/images/the-possessed.jpg",
+    "language": "Russian",
+    "link": "https://en.wikipedia.org/wiki/Demons_(Dostoyevsky_novel)\n",
+    "pages": 768,
+    "title": "The Possessed",
+    "year": 1872
+  },
+  {
+    "author": "Fyodor Dostoevsky",
+    "country": "Russia",
+    "imageLink": "lib/assets/images/the-brothers-karamazov.jpg",
+    "language": "Russian",
+    "link": "https://en.wikipedia.org/wiki/The_Brothers_Karamazov\n",
+    "pages": 824,
+    "title": "The Brothers Karamazov",
+    "year": 1880
   },
   {
     "author": "Franz Kafka",
@@ -287,16 +317,6 @@
     "pages": 352,
     "title": "The Castle",
     "year": 1926
-  },
-  {
-    "author": "Nikos Kazantzakis",
-    "country": "Greece",
-    "imageLink": "lib/assets/images/zorba-the-greek.jpg",
-    "language": "Greek",
-    "link": "https://en.wikipedia.org/wiki/Zorba_the_Greek\n",
-    "pages": 368,
-    "title": "Zorba the Greek",
-    "year": 1946
   },
   {
     "author": "Leo Tolstoy",

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_sample/book_data.dart';
-import 'package:provider_sample/book_provider.dart';
+import 'package:provider_sample/provider/book_detail.dart';
+import 'package:provider_sample/provider/book_provider.dart';
+import 'package:provider_sample/provider/fav_books_provider.dart';
 import 'package:provider_sample/widgets.dart';
 
 class BookDetail extends StatefulWidget {
@@ -17,40 +19,59 @@ class _BookDetailState extends State<BookDetail> {
   bool status = false;
   BookProvider provider;
   List<Book> listBookService;
+  FavoriteBooksProvider favoriteBooksProvider;
+  BookDetailProvider bookDetailProvider;
 
   @override
   Widget build(BuildContext context) {
+    bookDetailProvider = Provider.of<BookDetailProvider>(context);
     provider = Provider.of<BookProvider>(context);
     listBookService = Provider.of<List<Book>>(context);
+    favoriteBooksProvider = Provider.of<FavoriteBooksProvider>(context);
 
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height / 3.2,
-            child: Consumer<BookProvider>(
-              builder: (context, value, child) {
-                return newSplash(context, value.selectedBook.imageLink);
-              },
-            ),
-          ),
+          bookImage(context),
           selectedBookInfo(),
-          buildSizedBox(12),
-          buildText("Yazara Ait Diger Kitaplar", 22, Colors.black),
-          buildSizedBox(12),
+          buildText(
+              "Yazara Ait Diger Kitaplar", 22, Colors.black, FontWeight.w900),
           authorOtherBooks(context),
         ],
       ),
     );
   }
 
-  Container authorOtherBooks(BuildContext context) {
-    provider.queryByAuthor();
+  Container bookImage(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3.2,
+      height: MediaQuery.of(context).size.height / 3.3,
+      child: Consumer<BookProvider>(
+        builder: (context, value, child) {
+          return newSplash(context, value.selectedBook.imageLink);
+        },
+      ),
+    );
+  }
+
+  Expanded selectedBookInfo() {
+    return Expanded(
+      flex: 4,
+      child: Column(
+        children: [
+          buildBookProperty(),
+          buildInsideBook(),
+        ],
+      ),
+    );
+  }
+
+  Container authorOtherBooks(BuildContext context) {
+    bookDetailProvider.queryByAuthor(provider.bookList, provider.selectedBook);
+    return Container(
+      height: MediaQuery.of(context).size.height / 3.3,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: provider.authorsBooks.length,
+        itemCount: bookDetailProvider.authorsBooks.length,
         itemBuilder: (BuildContext context, int index) {
           return listBookService == null
               ? Center(
@@ -58,7 +79,8 @@ class _BookDetailState extends State<BookDetail> {
                 )
               : GestureDetector(
                   onTap: () {
-                    provider.selectedBook = provider.authorsBooks[index];
+                    provider.selectedBook =
+                        bookDetailProvider.authorsBooks[index];
                     Navigator.of(context).pushNamedAndRemoveUntil(
                         "/book_detail", ModalRoute.withName("/"));
                   },
@@ -68,8 +90,9 @@ class _BookDetailState extends State<BookDetail> {
                       context,
                       false,
                       125,
-                      title: provider.authorsBooks[index].title,
-                      imagePath: provider.authorsBooks[index].imageLink,
+                      title: bookDetailProvider.authorsBooks[index].title,
+                      imagePath:
+                          bookDetailProvider.authorsBooks[index].imageLink,
                     ),
                   ),
                 );
@@ -78,66 +101,54 @@ class _BookDetailState extends State<BookDetail> {
     );
   }
 
-  Expanded selectedBookInfo() {
-    return Expanded(
-      flex: 4,
-      child: Container(
-        child: Column(
-          children: [
-            buildBookProperty(),
-            buildInsideBook(),
-          ],
-        ),
-      ),
-    );
-  }
-
   Expanded buildInsideBook() {
     return Expanded(
-      flex: 3,
+      flex: 2,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: buildText(dummy, 18, Colors.grey),
+          child: buildText(dummy, 18, Colors.grey, FontWeight.normal),
         ),
       ),
     );
   }
 
-  Container buildBookProperty() {
-    return Container(
-      child: Expanded(
-        flex: 1,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8, left: 8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+  Widget buildBookProperty() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Column(
+            children: [
+              buildText(provider.selectedBook.title, 22, Colors.black,
+                  FontWeight.w600),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    provider.selectedBook.title,
-                    style: TextStyle(fontSize: 20),
+                  buildText(provider.selectedBook.author, 18, Colors.black,
+                      FontWeight.w300),
+                  Icon(
+                    Icons.circle,
+                    color: Colors.black,
+                    size: 12,
                   ),
-                  Text(
-                    provider.selectedBook.author,
-                    style: TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
+                  buildText(provider.selectedBook.year, 18, Colors.black,
+                      FontWeight.w300),
                 ],
               ),
-            ),
-            addFavIcon()
-          ],
+            ],
+          ),
         ),
-      ),
+        addFavIcon()
+      ],
     );
   }
 
   IconButton addFavIcon() {
-    provider.favBookQuery();
+    favoriteBooksProvider.favBookQuery(provider.selectedBook);
     return IconButton(
-      icon: provider.listContain == false
+      icon: favoriteBooksProvider.listContain == false
           ? Icon(
               Icons.bookmark_border,
               size: 36,
@@ -148,7 +159,7 @@ class _BookDetailState extends State<BookDetail> {
               color: Colors.yellow,
             ),
       onPressed: () {
-        provider.addBookToFav(provider.selectedBook);
+        favoriteBooksProvider.addBookToFav(provider.selectedBook);
       },
     );
   }
