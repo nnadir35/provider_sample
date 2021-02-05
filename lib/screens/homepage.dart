@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: FutureBuilder(
         future: books.randomBookGenerate(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return randomBook == null
+          return books.bookList.isEmpty == true
               ? Text("Yükleniyor")
               : GestureDetector(
                   onTap: () {
@@ -215,23 +215,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  // Widget buildSearchBar() {
-  //   return Container(
-  //     margin: EdgeInsets.only(top: 50, right: 10, left: 10),
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.circular(8),
-  //     ),
-  //     child: TextField(
-  //       decoration: InputDecoration(
-  //         hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
-  //         hintText: 'Kitap veya yazar adı girin',
-  //         suffixIcon: Icon(Icons.search),
-  //         border: InputBorder.none,
-  //         contentPadding: EdgeInsets.only(left: 5, top: 12),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

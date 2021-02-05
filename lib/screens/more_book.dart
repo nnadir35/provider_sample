@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_sample/book_data.dart';
 import 'package:provider_sample/provider/book_provider.dart';
+import 'package:provider_sample/provider/more_book_provider.dart';
 
 class MoreBook extends StatefulWidget {
   @override
@@ -11,25 +13,41 @@ class MoreBook extends StatefulWidget {
 class _MoreBookState extends State<MoreBook> {
   BookProvider provider;
   List<Book> listBookService;
+  MoreBookProvider moreBookProvider;
+
+  TextEditingController searchBarController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     listBookService = Provider.of<List<Book>>(context);
     provider = Provider.of<BookProvider>(context);
-    return Scaffold(body: Column(children: [listView(context)]));
+    moreBookProvider = Provider.of<MoreBookProvider>(context);
+
+    return Scaffold(
+      body: Column(
+        children: [
+          buildSearchBar(),
+          listView(context),
+        ],
+      ),
+    );
   }
 
-  Container listView(BuildContext context) {
-    return Container(
-        height: MediaQuery.of(context).size.height,
-        child: ListView.builder(
-            itemCount: provider.bookList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return listBookService == null
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : rowStyle(index, context);
-            }));
+  Expanded listView(BuildContext context) {
+    return Expanded(
+      flex: 6,
+      child: Container(
+          child: ListView.builder(
+              itemCount: moreBookProvider.queryList.length == 0
+                  ? provider.bookList.length
+                  : moreBookProvider.queryList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return provider.bookList == null
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : rowStyle(index, context);
+              })),
+    );
   }
 
   Container rowStyle(int index, BuildContext context) {
@@ -59,8 +77,12 @@ class _MoreBookState extends State<MoreBook> {
   Column bookInfo(int index) {
     return Column(
       children: [
-        Text(listBookService[index].title),
-        Text(listBookService[index].author),
+        moreBookProvider.queryList.length == 0
+            ? Text(provider.bookList[index].title)
+            : Text(moreBookProvider.queryList[index].title),
+        moreBookProvider.queryList.length == 0
+            ? Text(provider.bookList[index].author)
+            : Text(moreBookProvider.queryList[index].author),
       ],
     );
   }
@@ -71,26 +93,37 @@ class _MoreBookState extends State<MoreBook> {
       child: Container(
         width: MediaQuery.of(context).size.width / 3,
         child: Image(
-          image: AssetImage(listBookService[index].imageLink),
+          image: moreBookProvider.queryList.length == 0
+              ? AssetImage(provider.bookList[index].imageLink)
+              : AssetImage(moreBookProvider.queryList[index].imageLink),
         ),
       ),
     );
   }
 
   Widget buildSearchBar() {
-    return Container(
-      margin: EdgeInsets.only(top: 50, right: 10, left: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
-          hintText: 'Kitap veya yazar adı girin',
-          suffixIcon: Icon(Icons.search),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.only(left: 5, top: 12),
+    return Expanded(
+      flex: 1,
+      child: Container(
+        margin: EdgeInsets.only(top: 50, right: 10, left: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: TextField(
+          controller: searchBarController,
+          onChanged: (value) {
+            moreBookProvider.type = searchBarController.text;
+            print("searchBarController.text: " + searchBarController.text);
+            moreBookProvider.queryBook(provider.bookList);
+          },
+          decoration: InputDecoration(
+            hintStyle: TextStyle(fontSize: 17, color: Colors.grey),
+            hintText: 'Kitap veya yazar adı girin',
+            suffixIcon: Icon(Icons.search),
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.only(left: 5, top: 12),
+          ),
         ),
       ),
     );

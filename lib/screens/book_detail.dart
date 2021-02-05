@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_sample/book_data.dart';
-import 'package:provider_sample/provider/book_detail.dart';
+import 'package:provider_sample/provider/book_detail_provider.dart';
 import 'package:provider_sample/provider/book_provider.dart';
 import 'package:provider_sample/provider/fav_books_provider.dart';
 import 'package:provider_sample/widgets.dart';

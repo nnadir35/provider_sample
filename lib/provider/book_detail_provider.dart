@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:provider_sample/book_data.dart';
 
 class BookDetailProvider extends ChangeNotifier {

@@ -60,7 +60,6 @@ Widget newSplash(BuildContext context, String imagePath) {
   return Container(
     width: MediaQuery.of(context).size.width,
     child: Image(
-      //fit: BoxFit.fitHeight,
       image: AssetImage(imagePath),
     ),
   );

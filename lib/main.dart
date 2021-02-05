@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_sample/provider/book_detail.dart';
+import 'package:provider_sample/provider/book_detail_provider.dart';
 import 'package:provider_sample/provider/book_provider.dart';
 import 'package:provider_sample/provider/fav_books_provider.dart';
+import 'package:provider_sample/provider/more_book_provider.dart';
 import 'package:provider_sample/screens/book_detail.dart';
 import 'package:provider_sample/screens/fav_books.dart';
 import 'package:provider_sample/screens/homepage.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   final BookProvider bookProvider = BookProvider();
   final BookDetailProvider bookDetailProvider = BookDetailProvider();
   final FavoriteBooksProvider favBooksProvider = FavoriteBooksProvider();
-
+  final MoreBookProvider moreBookProvider = MoreBookProvider();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -44,6 +45,12 @@ class MyApp extends StatelessWidget {
             context,
           ) =>
               bookDetailProvider,
+        ),
+        ChangeNotifierProvider(
+          create: (
+            context,
+          ) =>
+              moreBookProvider,
         ),
       ],
       child: MaterialApp(
