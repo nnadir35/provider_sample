@@ -12,11 +12,11 @@ class MoreBookProvider extends ChangeNotifier {
     allBooks.forEach((book) {
       if (book.title.toLowerCase().contains(x) == true ||
           book.author.toLowerCase().contains(x) == true) {
-        print("oluru var ");
         queryList.add(book);
       }
     });
-    print("queryList.length: " + queryList.length.toString());
+    //type = "";
+    print("type: " + type.toString());
     notifyListeners();
   }
 }

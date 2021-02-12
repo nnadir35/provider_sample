@@ -114,34 +114,36 @@ class _BookDetailState extends State<BookDetail> {
   }
 
   Widget buildBookProperty() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: Column(
-            children: [
-              buildText(provider.selectedBook.title, 22, Colors.black,
-                  FontWeight.w600),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildText(provider.selectedBook.author, 18, Colors.black,
-                      FontWeight.w300),
-                  Icon(
-                    Icons.circle,
-                    color: Colors.black,
-                    size: 12,
-                  ),
-                  buildText(provider.selectedBook.year, 18, Colors.black,
-                      FontWeight.w300),
-                ],
-              ),
-            ],
+    return SafeArea(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              children: [
+                buildText(provider.selectedBook.title, 22, Colors.black,
+                    FontWeight.w600),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildText(provider.selectedBook.author, 18, Colors.black,
+                        FontWeight.w300),
+                    Icon(
+                      Icons.circle,
+                      color: Colors.black,
+                      size: 12,
+                    ),
+                    buildText(provider.selectedBook.year, 18, Colors.black,
+                        FontWeight.w300),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        addFavIcon()
-      ],
+          addFavIcon()
+        ],
+      ),
     );
   }
 

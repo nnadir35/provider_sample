@@ -61,7 +61,7 @@ class _FavoriteBooksState extends State<FavoriteBooks> {
           Padding(
             padding: const EdgeInsets.all(2.0),
             child: Container(
-              width: MediaQuery.of(context).size.width / 3,
+              width: MediaQuery.of(context).size.width / 4,
               child: Image(
                 image: AssetImage(provider.favBookList[index].imageLink),
               ),

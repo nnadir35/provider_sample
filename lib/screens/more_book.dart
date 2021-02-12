@@ -33,11 +33,13 @@ class _MoreBookState extends State<MoreBook> {
   }
 
   Expanded listView(BuildContext context) {
+    print(searchBarController.text);
     return Expanded(
       flex: 6,
       child: Container(
           child: ListView.builder(
-              itemCount: moreBookProvider.queryList.length == 0
+              itemCount: moreBookProvider.queryList.length == 0 ||
+                      searchBarController.text == ""
                   ? provider.bookList.length
                   : moreBookProvider.queryList.length,
               itemBuilder: (BuildContext context, int index) {
@@ -57,7 +59,10 @@ class _MoreBookState extends State<MoreBook> {
       ),
       child: GestureDetector(
         onTap: () {
-          provider.selectedBook = listBookService[index];
+          moreBookProvider.queryList.length == 0 ||
+                  searchBarController.text == ""
+              ? provider.selectedBook = provider.bookList[index]
+              : provider.selectedBook = moreBookProvider.queryList[index];
           Navigator.pushNamed(context, "/book_detail");
         },
         child: Row(
@@ -77,10 +82,10 @@ class _MoreBookState extends State<MoreBook> {
   Column bookInfo(int index) {
     return Column(
       children: [
-        moreBookProvider.queryList.length == 0
+        moreBookProvider.queryList.length == 0 || searchBarController.text == ""
             ? Text(provider.bookList[index].title)
             : Text(moreBookProvider.queryList[index].title),
-        moreBookProvider.queryList.length == 0
+        moreBookProvider.queryList.length == 0 || searchBarController.text == ""
             ? Text(provider.bookList[index].author)
             : Text(moreBookProvider.queryList[index].author),
       ],
@@ -93,7 +98,8 @@ class _MoreBookState extends State<MoreBook> {
       child: Container(
         width: MediaQuery.of(context).size.width / 3,
         child: Image(
-          image: moreBookProvider.queryList.length == 0
+          image: moreBookProvider.queryList.length == 0 ||
+                  searchBarController.text == ""
               ? AssetImage(provider.bookList[index].imageLink)
               : AssetImage(moreBookProvider.queryList[index].imageLink),
         ),
@@ -114,7 +120,6 @@ class _MoreBookState extends State<MoreBook> {
           controller: searchBarController,
           onChanged: (value) {
             moreBookProvider.type = searchBarController.text;
-            print("searchBarController.text: " + searchBarController.text);
             moreBookProvider.queryBook(provider.bookList);
           },
           decoration: InputDecoration(
