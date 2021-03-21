@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:provider_sample/book_data.dart';
+import 'package:provider_sample/assets/model/book_data.dart';
 
 class MoreBookProvider extends ChangeNotifier {
   String type;

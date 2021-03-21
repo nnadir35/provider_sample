@@ -3,15 +3,18 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider_sample/book_data.dart';
+import 'package:provider_sample/assets/model/book_data.dart';
+
+
+
 
 class BookProvider extends ChangeNotifier {
   List<Book> bookList = <Book>[];
   Book selectedBook;
   Future<List<Book>> allBooks() async {
     List<Book> x = <Book>[];
-    var data =
-        jsonDecode(await rootBundle.loadString("lib/assets/json/books.json"));
+    var data = jsonDecode(
+        await rootBundle.loadString("lib/assets/json/newbooks.json"));
     data.forEach((element) => x.add(Book.fromJson(element)));
     bookList = x.toSet().toList();
     bookList.shuffle();
@@ -20,36 +23,42 @@ class BookProvider extends ChangeNotifier {
 
   List<String> languages = ["İngilizce", "Fransızca", "Almanca"];
   List<Book> booksForUser = <Book>[];
-  String language;
+  String selectedLanguage;
 
   Book randomBook;
 
-  Map<String, String> translateLanguage = {
+  Map<String, String> languageMap = {
     "İngilizce": "English",
     "Fransızca": "French",
     "Almanca": "German",
-    "Rusça": "Russian"
+    "Rusça": "Russian",
+    "İtalyanca": "Italian",
+    "İspanyolca": "Spanish",
+    "Arapça": "Arabic",
+    "Danca": "Danish"
   };
 
   dropdownButtonValueChange(String value) {
-    language = value;
+    selectedLanguage = value;
     notifyListeners();
   }
 
-  queryByLanguage() {
+  Future<List<Book>> queryByLanguage() async {
     booksForUser.clear();
-    bookList.forEach((book) {
-      if (book.language == language) {
-        booksForUser.add(book);
-      }
+    await allBooks().then((booklist) {
+      bookList.forEach((book) {
+        if (book.language == selectedLanguage) {
+          booksForUser.add(book);
+        }
+      });
     });
-    print(booksForUser.length.toString());
-    notifyListeners();
+    return booksForUser;
   }
 
-  randomBookGenerate() async {
-    List<Book> allbooks = await allBooks();
-    randomBook = allbooks[Random().nextInt(13)];
+  Future<Book> randomBookGenerate() async {
+    await allBooks().then((books) {
+      randomBook = books[Random().nextInt(100)];
+    });
     return randomBook;
   }
 }

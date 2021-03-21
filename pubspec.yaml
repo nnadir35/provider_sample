@@ -44,46 +44,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - lib/assets/images/hamlet.jpg
-    - lib/assets/images/buddenbrooks.jpg
-    - lib/assets/images/blindness.jpg
-    - lib/assets/images/tales-and-poems-of-edgar-allan-poe.jpg
-    - lib/assets/images/bostan.jpg
-    - lib/assets/images/the-magic-mountain.jpg
-    - lib/assets/images/gullivers-travels.jpg
-    - lib/assets/images/mrs-dalloway.jpg
-    - lib/assets/images/faust.jpg
-    - lib/assets/images/essais.jpg
-    - lib/assets/images/l-etranger.jpg
-    - lib/assets/images/dead-souls.jpg
-    - lib/assets/images/51frUNw6i9L.jpg
-    - lib/assets/images/hunger.jpg
-    - lib/assets/images/hamlet.jpg
-    - lib/assets/images/king-lear.jpg
-    - lib/assets/images/othello.jpg
-    - lib/assets/images/war-and-peace.jpg
-    - lib/assets/images/the-idiot.jpg
-    - lib/assets/images/the-trial.jpg
-    - lib/assets/images/don-quijote-de-la-mancha.jpg
-    - lib/assets/images/the-iliad-of-homer.jpg
-    - lib/assets/images/great-expectations.jpg
-    - lib/assets/images/absalom-absalom.jpg
-    - lib/assets/images/madame-bovary.jpg
-    - lib/assets/images/l-education-sentimentale.jpg
-    - lib/assets/images/gypsy-ballads.jpg
-    - lib/assets/images/to-the-lighthouse.jpg
-    - lib/assets/images/the-death-of-ivan-ilyich.jpg
-    - lib/assets/images/one-hundred-years-of-solitude.jpg
-    - lib/assets/images/anna-karenina.jpg
-    - lib/assets/images/love-in-the-time-of-cholera.jpg  
-    - lib/assets/images/the-old-man-and-the-sea.jpg
-    - lib/assets/images/the-odyssey-of-homer.jpg
-    - lib/assets/images/stories-of-franz-kafka.jpg
-    - lib/assets/images/the-castle.jpg
-    - lib/assets/json/books.json
-    - lib/assets/images/crime-and-punishment.jpg
-    - lib/assets/images/the-possessed.jpg
-    - lib/assets/images/the-brothers-karamazov.jpg 
+    - lib/assets/images2/
+    - lib/assets/json/newbooks.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

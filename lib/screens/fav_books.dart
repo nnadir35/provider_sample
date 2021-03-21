@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-
-import 'package:provider_sample/provider/book_provider.dart';
 import 'package:provider_sample/provider/fav_books_provider.dart';
 import 'package:provider_sample/widgets.dart';
 
@@ -14,7 +12,6 @@ class FavoriteBooks extends StatefulWidget {
 class _FavoriteBooksState extends State<FavoriteBooks> {
   @override
   Widget build(BuildContext context) {
-    var bookProvider = Provider.of<BookProvider>(context);
     var favBookProvider = Provider.of<FavoriteBooksProvider>(context);
     return Scaffold(
       body: Container(

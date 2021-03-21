@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_sample/book_data.dart';
 import 'package:provider_sample/provider/book_provider.dart';
 import 'package:provider_sample/provider/more_book_provider.dart';
 
@@ -12,13 +11,11 @@ class MoreBook extends StatefulWidget {
 
 class _MoreBookState extends State<MoreBook> {
   BookProvider provider;
-  List<Book> listBookService;
   MoreBookProvider moreBookProvider;
 
   TextEditingController searchBarController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    listBookService = Provider.of<List<Book>>(context);
     provider = Provider.of<BookProvider>(context);
     moreBookProvider = Provider.of<MoreBookProvider>(context);
 

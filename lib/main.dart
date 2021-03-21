@@ -22,12 +22,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        FutureProvider(
-          create: (context) => bookProvider.allBooks(),
-        ),
-        FutureProvider(
-          create: (context) => bookProvider.randomBookGenerate(),
-        ),
         ChangeNotifierProvider(
           create: (
             context,

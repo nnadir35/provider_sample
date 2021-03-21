@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_sample/book_data.dart';
 import 'package:provider_sample/provider/book_detail_provider.dart';
 import 'package:provider_sample/provider/book_provider.dart';
 import 'package:provider_sample/provider/fav_books_provider.dart';
@@ -18,7 +17,7 @@ class BookDetail extends StatefulWidget {
 class _BookDetailState extends State<BookDetail> {
   bool status = false;
   BookProvider provider;
-  List<Book> listBookService;
+  // List<Book> listBookService;
   FavoriteBooksProvider favoriteBooksProvider;
   BookDetailProvider bookDetailProvider;
 
@@ -26,7 +25,7 @@ class _BookDetailState extends State<BookDetail> {
   Widget build(BuildContext context) {
     bookDetailProvider = Provider.of<BookDetailProvider>(context);
     provider = Provider.of<BookProvider>(context);
-    listBookService = Provider.of<List<Book>>(context);
+    // listBookService = Provider.of<List<Book>>(context);
     favoriteBooksProvider = Provider.of<FavoriteBooksProvider>(context);
 
     return Scaffold(
@@ -73,29 +72,26 @@ class _BookDetailState extends State<BookDetail> {
         scrollDirection: Axis.horizontal,
         itemCount: bookDetailProvider.authorsBooks.length,
         itemBuilder: (BuildContext context, int index) {
-          return listBookService == null
-              ? Center(
-                  child: Text("boş"),
-                )
-              : GestureDetector(
-                  onTap: () {
-                    provider.selectedBook =
-                        bookDetailProvider.authorsBooks[index];
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        "/book_detail", ModalRoute.withName("/"));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: buildBookImage(
-                      context,
-                      false,
-                      125,
-                      title: bookDetailProvider.authorsBooks[index].title,
-                      imagePath:
-                          bookDetailProvider.authorsBooks[index].imageLink,
-                    ),
-                  ),
-                );
+          // if (book.language == selectedLanguage) {
+          //     booksForUser.add(book);
+          //   }
+          return GestureDetector(
+            onTap: () {
+              provider.selectedBook = bookDetailProvider.authorsBooks[index];
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  "/book_detail", ModalRoute.withName("/"));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: buildBookImage(
+                context,
+                false,
+                125,
+                title: bookDetailProvider.authorsBooks[index].title,
+                imagePath: bookDetailProvider.authorsBooks[index].imageLink,
+              ),
+            ),
+          );
         },
       ),
     );

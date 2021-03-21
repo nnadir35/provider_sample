@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_sample/book_data.dart';
+import 'package:provider_sample/assets/model/book_data.dart';
 import 'package:provider_sample/provider/book_provider.dart';
 import 'package:provider_sample/screens/book_detail.dart';
 import 'package:provider_sample/screens/more_book.dart';
@@ -16,15 +16,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Book> listBookService;
   BookProvider books;
-  Book randomBook;
+
   @override
   Widget build(BuildContext context) {
-    listBookService = Provider.of<List<Book>>(context);
     books = Provider.of<BookProvider>(context);
-    randomBook = Provider.of<BookProvider>(context).randomBook;
-
     return Scaffold(
       body: Column(
         children: [
@@ -39,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
       flex: 11,
       child: Column(
         children: [
-          buildTopScreen(),
+          searchBar(),
           buildMainPage(),
         ],
       ),
@@ -52,16 +48,16 @@ class _MyHomePageState extends State<MyHomePage> {
       child: ListView(
         children: [
           buildText("Keşfet", 32, Colors.black, FontWeight.w800),
-          //buildSizedBox(12),
+          buildSizedBox(12),
           buildSplash(),
           buildSizedBox(12),
           buildRow(),
-          buildListView(books.bookList, true),
+          buildListView(books.allBooks(), true),
           buildSizedBox(12),
           buildText(
               "Seçtiğiniz dilde kitaplar", 24, Colors.black, FontWeight.w800),
           buildSizedBox(12),
-          buildListView(books.booksForUser, false),
+          buildListView(books.queryByLanguage(), false),
           buildBottomBar(),
         ],
       ),
@@ -73,58 +69,62 @@ class _MyHomePageState extends State<MyHomePage> {
       child: FutureBuilder(
         future: books.randomBookGenerate(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return books.bookList.isEmpty == true
-              ? Text("Yükleniyor")
+          return !snapshot.hasData
+              ? Center(child: CircularProgressIndicator())
               : GestureDetector(
                   onTap: () {
-                    books.selectedBook = books.randomBook;
+                    books.selectedBook = snapshot.data;
                     Navigator.pushNamed(context, "/book_detail");
                   },
-                  child: books.randomBook == null
-                      ? Text("Yükleniyor")
-                      : newSplash(context, books.randomBook.imageLink),
+                  child: newSplash(context, snapshot.data.imageLink),
                 );
         },
       ),
     );
   }
 
-  Widget buildListView(List<Book> x, bool allBooks) {
-    List<Book> choosen = x;
+  Widget buildListView(Future<List<Book>> bookList, bool allBooks) {
     return Container(
-      height: MediaQuery.of(context).size.height / 3.2,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: allBooks == true ? 6 : choosen.length,
-        itemBuilder: (BuildContext context, int index) {
-          return choosen == null
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : GestureDetector(
-                  onTap: () {
-                    books.selectedBook = choosen[index];
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookDetail(),
-                      ),
+        height: MediaQuery.of(context).size.height / 3.2,
+        child: FutureBuilder(
+            future: bookList,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              return !snapshot.hasData
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: allBooks == true ? 6 : snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return snapshot.data == null
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  books.selectedBook = snapshot.data[index];
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => BookDetail(),
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: buildBookImage(
+                                    context,
+                                    false,
+                                    125,
+                                    title: snapshot.data[index].title,
+                                    imagePath: snapshot.data[index].imageLink,
+                                  ),
+                                ),
+                              );
+                      },
                     );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: buildBookImage(
-                      context,
-                      false,
-                      125,
-                      title: choosen[index].title,
-                      imagePath: choosen[index].imageLink,
-                    ),
-                  ),
-                );
-        },
-      ),
-    );
+            }));
   }
 
   Widget buildBottomBar() {
@@ -180,39 +180,42 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildTopScreen() {
-    return Container(
-      margin: EdgeInsets.only(top: 35),
-      child: Expanded(
-        flex: 2,
-        child: InputDecorator(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
+  Widget searchBar() {
+    return Consumer<BookProvider>(
+      builder: (BuildContext context, BookProvider provider, Widget child) {
+        return Container(
+          margin: EdgeInsets.only(top: 35),
+          child: Expanded(
+            flex: 2,
+            child: InputDecorator(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  hint: Text("İstediğiniz dile göre kitap arayın"),
+                  value: provider.selectedLanguage,
+                  isDense: true,
+                  onChanged: (newValue) {
+                    provider.dropdownButtonValueChange(newValue);
+                    provider.queryByLanguage();
+                  },
+                  items: provider.languageMap.entries
+                      .map(
+                        (MapEntry element) => DropdownMenuItem(
+                          value: element.value,
+                          child: Text(element.key),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ),
           ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton(
-              hint: Text("İstediğiniz dile göre kitap arayın"),
-              value: books.language,
-              isDense: true,
-              onChanged: (newValue) {
-                books.dropdownButtonValueChange(newValue);
-                print("books.language: " + books.language);
-                books.queryByLanguage();
-              },
-              items: books.translateLanguage.entries
-                  .map(
-                    (MapEntry element) => DropdownMenuItem(
-                      value: element.value,
-                      child: Text(element.key),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
